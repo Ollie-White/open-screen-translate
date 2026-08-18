@@ -2,14 +2,16 @@
   "name": "open-screen-translate",
   "version": "0.1.0",
   "private": true,
-  "description": "Privacy-first, local screen OCR and translation overlay MVP",
+  "description": "Privacy-first, local screen OCR and translation overlay MVP for Windows and Linux",
   "main": "dist-electron/main.js",
   "type": "module",
   "scripts": {
     "dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && electron .\"",
     "build": "tsc -p tsconfig.electron.json && vite build",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit"
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "package:win": "npm run build && electron-builder --win --x64 --arm64",
+    "package:linux": "npm run build && electron-builder --linux --x64 --arm64"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -23,9 +25,36 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "concurrently": "latest",
+    "electron-builder": "^26.15.3",
     "typescript": "latest",
     "vite": "latest",
     "vitest": "latest",
     "wait-on": "latest"
+  },
+  "build": {
+    "appId": "org.openscreen.translate",
+    "productName": "OpenScreen Translate",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "${productName}-${version}-${arch}-setup.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    }
   }
 }
