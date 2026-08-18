@@ -1,0 +1,31 @@
+{
+  "name": "open-screen-translate",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Privacy-first, local screen OCR and translation overlay MVP",
+  "main": "dist-electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && electron .\"",
+    "build": "tsc -p tsconfig.electron.json && vite build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "electron": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tesseract.js": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "concurrently": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "wait-on": "latest"
+  }
+}
