@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "description": "Privacy-first, local screen OCR and translation overlay MVP for Windows and Linux",
+  "author": "OpenScreen Translate <opensource@openscreen.local>",
+  "desktopName": "openscreen-translate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ollie-White/open-screen-translate.git"
+  },
   "main": "dist-electron/main.js",
   "type": "module",
   "scripts": {
@@ -15,7 +21,6 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "electron": "latest",
     "react": "latest",
     "react-dom": "latest",
     "tesseract.js": "latest"
@@ -25,6 +30,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "concurrently": "latest",
+    "electron": "latest",
     "electron-builder": "^26.15.3",
     "typescript": "latest",
     "vite": "latest",
@@ -54,6 +60,7 @@
         "deb"
       ],
       "category": "Utility",
+      "syncDesktopName": true,
       "artifactName": "${productName}-${version}-${arch}.${ext}"
     }
   }

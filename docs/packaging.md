@@ -1,6 +1,6 @@
 # Packaging and platform test plan
 
-OpenScreen Translate ships only for Windows and Linux. Packaging is intentionally local and does not publish, sign, upload, or create releases.
+OpenScreen Translate ships only for Windows and Linux. Local package commands do not publish anything. GitHub Actions checks each push and, when a `v*` tag is pushed, creates a GitHub Release containing installable x64 artifacts.
 
 ## Package commands
 
@@ -15,6 +15,22 @@ Both commands build the renderer and Electron main process first, then write art
 - Linux: AppImage and Debian `.deb` for x64 and ARM64.
 
 Release owners must code-sign Windows artifacts before public distribution. Linux artifacts must state supported desktop environments and retain dependency/licence notices. macOS is developer-only and must not receive an artifact from this project.
+
+## GitHub releases
+
+Push a semver version tag to create a release:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+The release workflow builds and attaches:
+
+- Windows x64: NSIS `.exe` installer
+- Linux x64: portable `.AppImage`
+
+The package job also uploads the same artifacts to every manually dispatched run, but only a version tag creates a public GitHub Release. Windows artifacts are not code-signed yet, so users will see the normal unsigned-app warning. Do not tag a production release until the interactive manual acceptance checks below have passed.
 
 ## Manual acceptance matrix
 
